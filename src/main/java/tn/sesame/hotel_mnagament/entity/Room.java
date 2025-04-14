@@ -3,6 +3,7 @@ package tn.sesame.hotel_mnagament.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,6 +21,9 @@ public class Room {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Hotel hotel;
+
+    @OneToMany(mappedBy = "room")
+    List<Booking> Bookings;
 
     @Enumerated(EnumType.STRING)
     private RoomType roomType;
