@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,7 +23,7 @@ public class User {
     private String email;
     private String password;
     private String role; // Exemple: "CLIENT"
-    @OneToMany(mappedBy = "Ueer")
+    @OneToMany(mappedBy = "user")
     List<Booking> Bookings;
 }
 

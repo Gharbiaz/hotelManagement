@@ -1,10 +1,8 @@
 package tn.sesame.hotel_mnagament.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 public enum RoomType {
 
     SINGLE(1),
@@ -12,4 +10,7 @@ public enum RoomType {
 
     private final int capacity;
 
+    RoomType(int capacity) {
+        this.capacity = capacity;
+    }
 }
