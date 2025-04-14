@@ -22,7 +22,7 @@ public class User {
     private String email;
     private String password;
     private String role; // Exemple: "CLIENT"
-    @OneToMany(mappedBy = "Ueer")
+    @OneToMany(mappedBy = "user")
     List<Booking> Bookings;
 }
 
