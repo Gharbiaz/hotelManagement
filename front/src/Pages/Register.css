@@ -45,3 +45,35 @@
 .register-container button:hover {
     background-color: #0056b3;
 }
+.register-page {
+    background-image: url("../img/HotelBooking.png");
+    background-size: cover;
+    background-position: center;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-container {
+    position: relative;
+    width: 400px;
+    padding: 30px;
+    background: url("../img/HotelBooking.png") no-repeat center center;
+    background-size: cover;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1; /* ensures the form is above the overlay */
+}
+
+.register-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8     ); /* white overlay with low opacity */
+    z-index: -1; /* the overlay is behind the form content */
+    border-radius: 10px;
+}

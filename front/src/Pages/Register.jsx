@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import "./Register.css";
+import {Link} from "react-router-dom";
 function Register() {
     const [formData, setFormData] = useState({
         username: "",
@@ -66,7 +67,7 @@ function Register() {
                     value={formData.username}
                     onChange={handleChange}
                     required
-                /><br />
+                /><br/>
 
                 <input
                     type="email"
@@ -75,7 +76,7 @@ function Register() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                /><br />
+                /><br/>
 
                 <input
                     type="password"
@@ -84,7 +85,7 @@ function Register() {
                     value={formData.password}
                     onChange={handleChange}
                     required
-                /><br />
+                /><br/>
 
                 <input
                     type="password"
@@ -102,10 +103,10 @@ function Register() {
                                     : "red"
                                 : ""
                     }}
-                /><br />
+                /><br/>
 
                 {/* Google reCAPTCHA */}
-                <div style={{ margin: "20px 0" }}>
+                <div style={{margin: "20px 0"}}>
                     <ReCAPTCHA
                         sitekey={SITE_KEY}
                         onChange={(value) => setCaptchaValue(value)}
@@ -113,6 +114,9 @@ function Register() {
                 </div>
 
                 <button type="submit">Register</button>
+                <p>
+                    Already have an account? <Link to="/login">Login here</Link>
+                </p>
             </form>
         </div>
     );
