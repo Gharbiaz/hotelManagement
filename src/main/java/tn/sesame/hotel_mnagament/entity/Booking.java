@@ -18,7 +18,7 @@ public class Booking implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+//jn
     @ManyToOne
     private User user;
 
