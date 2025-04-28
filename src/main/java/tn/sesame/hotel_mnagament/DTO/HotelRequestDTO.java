@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class HotelRequetDTO {
+public class HotelRequestDTO {
     private String name;
     private String city;
     private String address;
