@@ -26,5 +26,6 @@ public class Hotel {
 
     @OneToMany(mappedBy = "hotel")
     List<Booking> bookings;
+  
 }
 
