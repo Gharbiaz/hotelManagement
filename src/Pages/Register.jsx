@@ -1,27 +1,19 @@
 import { useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import "./Register.css";
-
 function Register() {
     const [formData, setFormData] = useState({
         username: "",
         email: "",
         password: "",
-        confirmPassword: "",
-        captchaInput: ""
+        confirmPassword: ""
     });
 
-    const [captcha, setCaptcha] = useState(generateCaptcha());
+    const [captchaValue, setCaptchaValue] = useState(null); // for real captcha
     const [error, setError] = useState("");
-    const [confirmTouched, setConfirmTouched] = useState(false); // track if confirmPassword was touched
+    const [confirmTouched, setConfirmTouched] = useState(false);
 
-    function generateCaptcha() {
-        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        let result = "";
-        for (let i = 0; i < 6; i++) {
-            result += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return result;
-    }
+    const SITE_KEY = "6LcmOycrAAAAAAXosdj2ylZGCMYqK8vsgEsej8cw"; // <-- put your real site key here
 
     const handleChange = (e) => {
         setFormData({
@@ -33,32 +25,30 @@ function Register() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Validate passwords match
         if (formData.password !== formData.confirmPassword) {
             setError("Passwords do not match.");
             return;
         }
 
-        // Validate captcha
-        if (formData.captchaInput !== captcha) {
-            setError("Captcha is incorrect.");
+        if (!captchaValue) {
+            setError("Please complete the captcha.");
             return;
         }
 
-        // Clear errors
         setError("");
 
-        console.log("Form submitted:", formData);
+        console.log("Form submitted:", formData, "Captcha value:", captchaValue);
 
-        // Reset form
+        // After that you should send captchaValue to your backend for verification
+
+        // Reset
         setFormData({
             username: "",
             email: "",
             password: "",
-            confirmPassword: "",
-            captchaInput: ""
+            confirmPassword: ""
         });
-        setCaptcha(generateCaptcha());
+        setCaptchaValue(null);
         setConfirmTouched(false);
     };
 
@@ -114,18 +104,13 @@ function Register() {
                     }}
                 /><br />
 
-                {/* Captcha */}
-                <div style={{ margin: "10px 0", fontWeight: "bold" }}>
-                    {captcha}
+                {/* Google reCAPTCHA */}
+                <div style={{ margin: "20px 0" }}>
+                    <ReCAPTCHA
+                        sitekey={SITE_KEY}
+                        onChange={(value) => setCaptchaValue(value)}
+                    />
                 </div>
-                <input
-                    type="text"
-                    name="captchaInput"
-                    placeholder="Enter Captcha"
-                    value={formData.captchaInput}
-                    onChange={handleChange}
-                    required
-                /><br />
 
                 <button type="submit">Register</button>
             </form>
