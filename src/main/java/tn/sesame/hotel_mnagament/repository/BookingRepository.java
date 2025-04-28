@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import tn.sesame.hotel_mnagament.entity.Booking;
 import tn.sesame.hotel_mnagament.entity.Hotel;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository

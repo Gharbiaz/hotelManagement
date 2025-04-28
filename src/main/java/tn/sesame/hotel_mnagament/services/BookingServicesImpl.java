@@ -7,6 +7,7 @@ import tn.sesame.hotel_mnagament.DTO.BookingRequestDTO;
 import tn.sesame.hotel_mnagament.DTO.BookingResponseDTO;
 import tn.sesame.hotel_mnagament.entity.Booking;
 import tn.sesame.hotel_mnagament.repository.BookingRepository;
+import tn.sesame.hotel_mnagament.repository.IBookingRepository;
 import tn.sesame.hotel_mnagament.services.IBookingServices;
 
 import java.util.List;
