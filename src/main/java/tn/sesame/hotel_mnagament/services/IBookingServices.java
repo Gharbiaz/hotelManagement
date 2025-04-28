@@ -1,12 +1,15 @@
 package tn.sesame.hotel_mnagament.services;
-import tn.sesame.hotel_mnagament.entity.Booking;
+
+import tn.sesame.hotel_mnagament.DTO.BookingRequestDTO;
+import tn.sesame.hotel_mnagament.DTO.BookingResponseDTO;
 
 import java.util.List;
 
 public interface IBookingServices {
-    public List<Booking> getBookings();
-    public Booking getBooking(long id);
-    public Booking addBooking(Booking booking);
-    public Booking updateBooking(Booking booking);
-    public void deleteBooking(long id);
+
+    List<BookingResponseDTO> getBookings();
+    BookingResponseDTO getBooking(long id);
+    BookingResponseDTO addBooking(BookingRequestDTO bookingRequestDTO);
+    BookingResponseDTO updateBooking(long id, BookingRequestDTO bookingRequestDTO);
+    void deleteBooking(long id);
 }
