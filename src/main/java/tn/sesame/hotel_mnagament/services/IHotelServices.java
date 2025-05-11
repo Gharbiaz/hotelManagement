@@ -5,7 +5,7 @@ import tn.sesame.hotel_mnagament.DTO.HotelResponseDTO;
 
 import java.util.List;
 
-public interface IHotelService {
+public interface IHotelServices {
     List<HotelResponseDTO> getHotels();
     HotelResponseDTO getHotel(long id);
     HotelResponseDTO addHotel(HotelRequestDTO hotelRequestDTO);

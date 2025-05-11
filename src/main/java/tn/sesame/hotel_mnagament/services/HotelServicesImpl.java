@@ -1,7 +1,7 @@
 package tn.sesame.hotel_mnagament.services;
 
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.sesame.hotel_mnagament.DTO.HotelRequestDTO;
 import tn.sesame.hotel_mnagament.DTO.HotelResponseDTO;
@@ -9,30 +9,27 @@ import tn.sesame.hotel_mnagament.entity.Hotel;
 import tn.sesame.hotel_mnagament.repository.HotelRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class HotelServiceImpl implements IHotelService {
+@RequiredArgsConstructor
+public class HotelServicesImpl implements IHotelServices {
 
-    @Autowired
-    private HotelRepository hotelRepository;
-
-    @Autowired
-    private ModelMapper modelMapper;
+    private final HotelRepository hotelRepository;
+    private final ModelMapper modelMapper;
 
     @Override
     public List<HotelResponseDTO> getHotels() {
-        List<Hotel> hotels = hotelRepository.findAll();
-        return hotels.stream()
+        return hotelRepository.findAll()
+                .stream()
                 .map(hotel -> modelMapper.map(hotel, HotelResponseDTO.class))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public HotelResponseDTO getHotel(Long id) {
+    public HotelResponseDTO getHotel(long id) {
         Hotel hotel = hotelRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Hotel not found with id: " + id));
+                .orElseThrow(() -> new IllegalArgumentException("Hotel not found with id: " + id));
         return modelMapper.map(hotel, HotelResponseDTO.class);
     }
 
@@ -44,21 +41,21 @@ public class HotelServiceImpl implements IHotelService {
     }
 
     @Override
-    public HotelResponseDTO updateHotel(Long id, HotelRequestDTO hotelRequestDTO) {
-        Optional<Hotel> optionalHotel = hotelRepository.findById(id);
-        if (optionalHotel.isEmpty()) {
-            throw new RuntimeException("Hotel not found with id: " + id);
-        }
-        Hotel existingHotel = optionalHotel.get();
-        modelMapper.map(hotelRequestDTO, existingHotel); // mettre à jour les champs
-        Hotel updatedHotel = hotelRepository.save(existingHotel);
+    public HotelResponseDTO updateHotel(long id, HotelRequestDTO hotelRequestDTO) {
+        Hotel hotel = hotelRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Hotel not found with id: " + id));
+
+        // Map only the necessary fields
+        modelMapper.map(hotelRequestDTO, hotel);
+
+        Hotel updatedHotel = hotelRepository.save(hotel);
         return modelMapper.map(updatedHotel, HotelResponseDTO.class);
     }
 
     @Override
-    public void deleteHotel(Long id) {
+    public void deleteHotel(long id) {
         if (!hotelRepository.existsById(id)) {
-            throw new RuntimeException("Hotel not found with id: " + id);
+            throw new IllegalArgumentException("Hotel not found with id: " + id);
         }
         hotelRepository.deleteById(id);
     }

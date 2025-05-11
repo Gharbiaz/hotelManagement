@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.sesame.hotel_mnagament.DTO.HotelRequestDTO;
 import tn.sesame.hotel_mnagament.DTO.HotelResponseDTO;
-import tn.sesame.hotel_mnagament.services.IHotelService;
+import tn.sesame.hotel_mnagament.services.IHotelServices;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
 public class HotelController {
 
     @Autowired
-    private IHotelService hotelService;
+    private IHotelServices hotelService;
 
     // Get All Hotels
     @GetMapping
